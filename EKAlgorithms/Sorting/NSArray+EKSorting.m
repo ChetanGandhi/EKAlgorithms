@@ -7,7 +7,8 @@
 //
 
 #import "NSArray+EKSorting.h"
-#import "RadixNode.h"
+#import "SSRadixNode.h"
+
 
 @implementation NSArray (EKSorting)
 
@@ -104,7 +105,7 @@
     for (NSInteger i = count / 2; i > 0; i = i / 2) {
         for (NSInteger j = i; j < count; j++) {
             for (NSInteger k = j - i; k >= 0; k = k - i) {
-                if ([[self objectAtIndex:k + 1] floatValue] >= [[self objectAtIndex:k] floatValue]) {
+                if ([self[k + 1] floatValue] >= [self[k] floatValue]) {
                     break;
                 }
                 else {
@@ -159,6 +160,7 @@
     if (left < j) {
         [self quickSortWithLeftIndex:left withRightIndex:j];
     }
+    
     if (i < right) {
         [self quickSortWithLeftIndex:i withRightIndex:right];
     }
@@ -204,7 +206,7 @@
 
 #pragma mark - Radix Sort
 
-- (NSMutableArray *)radixSortForBase:(NSInteger)base;
+- (NSMutableArray *)radixSortForBase:(NSInteger)base
 {
     int max = [[self valueForKeyPath:@"@max.intValue"] intValue];
 
@@ -222,8 +224,9 @@
 + (NSMutableArray *)makeArrayFromRadixTable:(NSMutableArray *)radixTable
 {
     NSMutableArray *theArray = [NSMutableArray new];
-    for (RadixNode *bucketNode in radixTable) {
-        RadixNode *bucket = bucketNode.next;
+    
+    for (SSRadixNode *bucketNode in radixTable) {
+        SSRadixNode *bucket = bucketNode.next;
         while (bucket) {
             [theArray addObject:@(bucket.data)];
             bucket = bucket.next;
@@ -235,17 +238,18 @@
 + (NSMutableArray *)makeRadixTableForArray:(NSMutableArray *)theArray forBase:(NSInteger)base forDigit:(NSInteger)digit
 {
     NSMutableArray *radixTable = [self getTableOfEmptyBucketsForSize:base];
+    
     for (int i = 0; i < theArray.count; i++) {
-        NSInteger value = [[theArray objectAtIndex:i] integerValue];
+        NSInteger value = [theArray[i] integerValue];
         NSInteger radixIndex = [self getExaminedNumber:value withBase:base atDigit:digit];
-        RadixNode *current = (RadixNode *)[radixTable objectAtIndex:radixIndex];
+        SSRadixNode *current = (SSRadixNode *)radixTable[radixIndex];
         if (current.next) {
             while (current.next) {
                 current = [current next];
             }
         }
-        RadixNode *newEntry = [RadixNode new];
-        newEntry.data = [[theArray objectAtIndex:i] intValue];
+        SSRadixNode *newEntry = [SSRadixNode new];
+        newEntry.data = [theArray[i] intValue];
         current.next = newEntry;
     }
     
@@ -255,8 +259,9 @@
 + (NSMutableArray *)getTableOfEmptyBucketsForSize:(NSInteger)size
 {
     NSMutableArray *empty = [NSMutableArray new];
+    
     for (NSInteger i = 0; i < size; i++) {
-        [empty addObject:[RadixNode new]];
+        [empty addObject:[SSRadixNode new]];
     }
     
     return empty;
@@ -280,10 +285,10 @@
     
     for (NSUInteger i = 0; i < K; i++) {
         minIndex = i;
-        minValue = [[self objectAtIndex:i] unsignedIntegerValue];
+        minValue = [self[i] unsignedIntegerValue];
         
         for (NSUInteger j = i + 1; j < count; j++) {
-            NSUInteger el = [[self objectAtIndex:j] unsignedIntegerValue];
+            NSUInteger el = [self[j] unsignedIntegerValue];
             
             if (el < minValue) {
                 minIndex = j;
@@ -351,29 +356,29 @@
     m = mid + 1;
 
     for (i = min; j <= mid && m <= max; i++) {
-        if ([[self objectAtIndex:j] floatValue] <= [[self objectAtIndex:m] floatValue]) {
-            [temporaryArray replaceObjectAtIndex:i withObject:[self objectAtIndex:j]];
+        if ([self[j] floatValue] <= [self[m] floatValue]) {
+            temporaryArray[i] = self[j];
             j++;
         }
         else {
-            [temporaryArray replaceObjectAtIndex:i withObject:[self objectAtIndex:m]];
+            temporaryArray[i] = self[m];
             m++;
         }
     }
     if (j > mid) {
         for (k = m; k <= max; k++) {
-            [temporaryArray replaceObjectAtIndex:i withObject:[self objectAtIndex:k]];
+            temporaryArray[i] = self[k];
             i++;
         }
     }
     else {
         for (k = j; k <= mid; k++) {
-            [temporaryArray replaceObjectAtIndex:i withObject:[self objectAtIndex:k]];
+            temporaryArray[i] = self[k];
             i++;
         }
     }
     for (k = min; k <= max; k++) {
-        [self replaceObjectAtIndex:k withObject:[temporaryArray objectAtIndex:k]];
+        self[k] = temporaryArray[k];
     }
 }
 

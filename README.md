@@ -60,6 +60,7 @@ Strings
 10. Last occurrence of "needle" in a "haystack".
 11. Longest common subsequence.
 12. Levenshtein distance.
+13. KMP (Knuth–Morris–Pratt).
 
 Numeric Algorithms
 ------------------
@@ -133,13 +134,21 @@ So lets get our hands dirty and try to implement cool CS stuff with minimal use 
 
 Thanks!
 
+Similar repositories
+--------------------
+
+* [algorithms](https://github.com/sagivo/algorithms)
+
+> algorithms playground for common questions (Ruby language)
+
+* [SwiftStructures](https://github.com/waynewbishop/SwiftStructures)
+
+> Examples of commonly used data structures and algorithms in Swift. (Swift)
+
 Contributors
 ------------
 Special thanks to these guys for their contributions to the project's development:
 - [@stanislaw](https://github.com/stanislaw)
 - [@vittoriom ](https://github.com/vittoriom)
 - [@AustinChou](https://github.com/AustinChou)
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/EvgenyKarkan/ekalgorithms/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 

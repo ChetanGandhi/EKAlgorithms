@@ -10,12 +10,13 @@
 
 @implementation EKALocation
 
-- (instancetype)initWithLatitude:(double)latitude longitude:(double)longitude {
+- (instancetype)initWithLatitude:(double)latitude longitude:(double)longitude
+{
     self = [super init];
-
-    self.latitude = latitude;
-    self.longitude = longitude;
-
+    
+    _latitude  = latitude;
+    _longitude = longitude;
+    
     return self;
 }
 

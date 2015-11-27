@@ -9,14 +9,26 @@
 #import "EKLinkedList.h"
 #import "EKNode.h"
 
-@implementation EKLinkedList
+#if TARGET_OS_IPHONE
+#import "NSObject+EKComparisonForIOS.h"
+#endif
+
+@interface EKLinkedList ()
+{
+    NSUInteger _count;
+}
+
+@end
+
+@implementation EKLinkedList;
 
 - (instancetype)initWithHead:(NSObject *)value
 {
     self = [super init];
     
     if (self) {
-        self.head = [[EKNode alloc] initWithObject:value];
+        _head = [[EKNode alloc] initWithObject:value];
+        _count = 1;
     }
     return self;
 }
@@ -27,14 +39,17 @@
     
     if (self.tail == nil) {
         EKNode *lastNode = self.head;
-        for (NSUInteger i = 1; i < self.count; i++) {
+        for (NSUInteger i = 1; i < _count; i++) {
             lastNode = lastNode.next;
         }
         self.tail = lastNode;
+        
     }
-    node.next = self.head;
+    node.next          = self.head;
     self.head.previous = node;
-    self.head = node;
+    self.head          = node;
+    
+    _count++;
 }
 
 - (void)addToBack:(NSObject *)value
@@ -43,21 +58,23 @@
     
     if (self.tail == nil) {
         EKNode *lastNode = self.head;
-        for (NSUInteger i = 1; i < self.count; i++) {
+        for (NSUInteger i = 1; i < _count; i++) {
             lastNode = lastNode.next;
         }
         self.tail = lastNode;
     }
-    node.previous = self.tail;
+    node.previous  = self.tail;
     self.tail.next = node;
-    self.tail = node;
+    self.tail      = node;
+    
+    _count++;
 }
 
 - (void)insertObject:(NSObject *)object atIndex:(NSUInteger)index
 {
-    EKNode *currentNode = self.head;
+    EKNode *currentNode  = self.head;
     EKNode *previousNode = nil;
-    EKNode *nextNode = nil;
+    EKNode *nextNode     = nil;
     
     for (NSUInteger i = 1; i <= index; i++) {
         currentNode = currentNode.next;
@@ -76,11 +93,12 @@
     }
     else {
         previousNode.next = newNode;
-        newNode.previous = previousNode;
+        newNode.previous  = previousNode;
         
         nextNode.previous = newNode;
-        newNode.next = nextNode;
+        newNode.next      = nextNode;
     }
+    _count++;
 }
 
 - (NSObject *)first
@@ -109,18 +127,7 @@
 
 - (NSUInteger)count
 {
-    if (!self.head) {
-        return 0;
-    }
-    
-    EKNode *currentNode = self.head;
-    NSUInteger i = 1;
-    
-    while (currentNode.next) {
-        currentNode = currentNode.next;
-        i++;
-    }
-    return i;
+    return _count;
 }
 
 - (NSObject *)objectAtIndex:(NSUInteger)index
@@ -138,7 +145,8 @@
 {
     if (object) {
         NSMutableArray *result = [@[] mutableCopy];
-        EKNode *currentNode = self.head;
+        EKNode *currentNode    = self.head;
+        
         while (currentNode.next != nil) {
             if ([currentNode.value isEqualTo:object]) {
                 [result addObject:currentNode];
@@ -152,13 +160,14 @@
 
 - (BOOL)removeCurrent
 {
-        //FIXME: improve code below
+    //FIXME: improve code below
     NSLog(@"<#   #> %@", [self currentValue]);
     
     BOOL removed = NO;
     if (self.current != nil) {
         self.current.previous.next = self.current.next;
         removed = YES;
+        _count--;
     }
     else {
         removed = NO;
@@ -184,6 +193,7 @@
     }
     
     current.next = current.next.next;
+    _count--;
     
     return YES;
 }
@@ -203,13 +213,14 @@
     self.current = self.head;
     
     EKNode *previousNode = nil;
-    EKNode *nextNode = nil;
+    EKNode *nextNode     = nil;
     
     while (self.current) {
-        nextNode = self.current.next;
+        nextNode          = self.current.next;
         self.current.next = previousNode;
-        previousNode = self.current;
-        self.current  = nextNode;
+        
+        previousNode      = self.current;
+        self.current      = nextNode;
     }
     
     self.head = previousNode;

@@ -8,8 +8,8 @@
 
 #import "NSNumber+EKStuff.h"
 
-@implementation NSNumber (EKStuff);
 
+@implementation NSNumber (EKStuff);
 
 #pragma mark - Sieve of Eratosthenes
 
@@ -18,19 +18,19 @@
     NSMutableArray *resultArray = [@[] mutableCopy];
     
     for (NSUInteger i = 0; i < maxNumber; i++) {
-        resultArray[i] = [NSNumber numberWithInteger:i];
+        resultArray[i] = @((NSInteger)i);
     }
     
-    resultArray[1] = [NSNumber numberWithInteger:0];
+    resultArray[1] = @0;
     
     for (NSUInteger s = 2; s < maxNumber; s++) {
-        if (resultArray[s] != [NSNumber numberWithInteger:0]) {
+        if (![resultArray[s]  isEqual: @0]) {
             for (NSUInteger j = s * 2; j < maxNumber; j += s) {
-                resultArray[j] = [NSNumber numberWithInteger:0];
+                resultArray[j] = @0;
             }
         }
     }
-    [resultArray removeObjectIdenticalTo:[NSNumber numberWithInteger:0]];
+    [resultArray removeObjectIdenticalTo:@0];
     
     return [resultArray copy];
 }
@@ -40,11 +40,11 @@
 - (NSUInteger)greatestCommonDivisorWithNumber:(NSUInteger)secondNumber
 {
     NSUInteger firstNumber = [self unsignedIntegerValue];
-    NSUInteger c = 0;
+    NSUInteger c           = 0;
     
     while (firstNumber != 0) {
-        c = firstNumber;
-        firstNumber =  secondNumber % firstNumber;
+        c            = firstNumber;
+        firstNumber  = secondNumber % firstNumber;
         secondNumber = c;
     }
     
@@ -81,11 +81,11 @@
 {
     NSMutableArray *resultArray = [@[] mutableCopy];
     
-    resultArray[0] = [NSNumber numberWithInteger:0];
-    resultArray[1] = [NSNumber numberWithInteger:1];
+    resultArray[0] = @0;
+    resultArray[1] = @1;
     
     for (NSUInteger i = 2; i < number; i++) {
-        NSNumber *foo = [NSNumber numberWithInteger:[resultArray[i - 2] integerValue] + [resultArray[i - 1] integerValue]];
+        NSNumber *foo  = @([resultArray[i - 2] integerValue] + [resultArray[i - 1] integerValue]);
         resultArray[i] = foo;
     }
     
@@ -121,6 +121,7 @@
     }
     
     unsigned long long beforeLast = 0, last = 1;
+    
     while (index > 0) {
         last += beforeLast;
         beforeLast = last - beforeLast;
@@ -141,10 +142,10 @@
 {
     NSDecimalNumber *beforeLast = nil, *last = nil;
     beforeLast = [NSDecimalNumber decimalNumberWithMantissa:0 exponent:0 isNegative:NO];
-    last = [NSDecimalNumber decimalNumberWithMantissa:1 exponent:0 isNegative:NO];
+    last       = [NSDecimalNumber decimalNumberWithMantissa:1 exponent:0 isNegative:NO];
     
     while (index > 0) {
-        last = [last decimalNumberByAdding:beforeLast];
+        last       = [last decimalNumberByAdding:beforeLast];
         beforeLast = [last decimalNumberBySubtracting:beforeLast];
         --index;
     }
@@ -159,7 +160,7 @@
 + (NSNumber *)fibonacciAtIndex:(NSUInteger)index
 {
     NSArray *array = [NSNumber fibonacciNumbersUpToNumber:index + 1];
-    return [array objectAtIndex:index];
+    return array[index];
 }
 
 #pragma mark - Sum of digits of a number
@@ -167,10 +168,10 @@
 - (NSUInteger)sumOfDigits
 {
     NSUInteger number = [self unsignedIntegerValue];
-    NSUInteger sum = 0;
+    NSUInteger sum    = 0;
     
     while (number != 0) {
-        sum = sum + number % 10;
+        sum    = sum + number % 10;
         number = number / 10;
     }
     
@@ -184,10 +185,10 @@
     NSUInteger decimalNumber = 0, j = 1, remainder = 0;
     
     while (binary != 0) {
-        remainder = binary % 10;
+        remainder     = binary % 10;
         decimalNumber = decimalNumber + remainder * j;
-        j = j * 2;
-        binary = binary / 10;
+        j             = j * 2;
+        binary        = binary / 10;
     }
     
     return decimalNumber;
@@ -203,7 +204,7 @@
     
     while (quotient != 0) {
         binaryNumber[i++] = quotient % 2;
-        quotient = quotient / 2;
+        quotient          = quotient / 2;
     }
     
     NSMutableString *result = [[NSMutableString alloc] init];
@@ -237,7 +238,7 @@
 - (NSUInteger)reverseNumber
 {
     NSUInteger numberToReverse = [self unsignedIntegerValue];
-    NSUInteger rightDigit = 0;
+    NSUInteger rightDigit      = 0;
     NSMutableString *fooString = [@"" mutableCopy];
     
     do {
@@ -275,7 +276,7 @@
     NSAssert(givenYear > 0 && givenYear <= 9999, @"Plz enter another year from 0001 - 10000 range");
     
     NSUInteger remainder_4 = 0, remainder_100 = 0, remainder_400 = 0;
-    remainder_4 = givenYear % 4;
+    remainder_4   = givenYear % 4;
     remainder_100 = givenYear % 100;
     remainder_400 = givenYear % 400;
     
@@ -290,9 +291,9 @@
     NSUInteger s = 0, m = givenNumber, r = 0;
     
     do {
-        r = givenNumber % 10;
+        r           = givenNumber % 10;
         givenNumber = givenNumber / 10;
-        s = s + r * r * r;
+        s           = s + r * r * r;
     }
     while (givenNumber != 0);
     
@@ -305,13 +306,13 @@
 {
     NSUInteger givenNumber = [self unsignedIntegerValue];
     
-    if (givenNumber == 1) {
+    if (givenNumber == 1 || givenNumber == 0) {
         return NO;
     }
     
     for (int i = 2; i <= (int)sqrt(givenNumber); i++) {
         if (givenNumber % i == 0) {
-            return YES;
+            return NO;
         }
     }
     
@@ -406,8 +407,8 @@
     
     if (base == 2 || base == 8 || base == 10) {
         NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-        NSNumber *myNumber = [f numberFromString:resultString];
-        resultOfConvertion = myNumber;
+        NSNumber *myNumber   = [f numberFromString:resultString];
+        resultOfConvertion   = myNumber;
     }
     else {
         resultOfConvertion = [resultString copy];
@@ -422,14 +423,14 @@
 {
     NSParameterAssert([self floatValue] > 0);
     
-    Float32 result = (Float32)[self floatValue];
+    Float32 result       = (Float32)[self floatValue];
     Float32 halfOfResult = result * 0.5f;
     
-    int32_t i = *(int32_t *)&result;                                // get bits for floating value
-    i = 0x5f3759df - (i >> 1);                                      // gives initial guess
-    result = *(Float32 *)&i;                                        // convert bits back to float
+    int32_t i = *(int32_t *)&result;    // get bits for floating value
+    i         = 0x5f3759df - (i >> 1);  // gives initial guess
+    result    = *(Float32 *)&i;         // convert bits back to float
     
-    for (NSUInteger i = 0; i < 4; i++) {
+    for (NSUInteger idx = 0; idx < 4; idx++) {
         result = result * (1.5f - halfOfResult * result * result);  // Newton step, repeating increases accuracy
     }
     
@@ -449,27 +450,29 @@
 {
     // Be careful about number types, we will
     // return the same type as first object in array
-    NSNumber *sum;
+    NSNumber *sum    = nil;
     NSUInteger count = numbers.count;
+    
     switch ([[numbers firstObject] numberType]) {
         case kCFNumberSInt32Type:
-            sum = [NSNumber numberWithInt:[[numbers firstObject] intValue]];
+            sum = @([[numbers firstObject] intValue]);
             for (NSUInteger i = 1; i < count; i++) {
-                sum = [NSNumber numberWithInt:([sum intValue] + [[numbers objectAtIndex:i] intValue])];
+                sum = @([sum intValue] + [numbers[i] intValue]);
             }
             break;
+            
         case kCFNumberSInt64Type:
-            sum = [NSNumber numberWithInteger:[[numbers firstObject] integerValue]];
+            sum = @([[numbers firstObject] integerValue]);
             for (NSUInteger i = 1; i < count; i++) {
-                sum = [NSNumber numberWithInteger:([sum integerValue] + [[numbers objectAtIndex:i] integerValue])];
+                sum = @([sum integerValue] + [numbers[i] integerValue]);
             }
             break;
             
         case kCFNumberFloat32Type:
         case kCFNumberFloat64Type:
-            sum = [NSNumber numberWithFloat:[[numbers firstObject] floatValue]];
+            sum = @([[numbers firstObject] floatValue]);
             for (NSUInteger i = 1; i < count; i++) {
-                sum = [NSNumber numberWithFloat:([sum floatValue] + [[numbers objectAtIndex:i] floatValue])];
+                sum = @([sum floatValue] + [numbers[i] floatValue]);
             }
             break;
             
@@ -477,6 +480,7 @@
             NSAssert(0, @"Not recognized type, check CFNumberType!");
             break;
     }
+    
     return sum;
 }
 

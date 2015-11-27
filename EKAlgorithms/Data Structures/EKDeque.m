@@ -19,11 +19,12 @@
 
 #pragma mark - init
 
-- (id)init
+- (instancetype)init
 {
     self = [super init];
+    
     if (self) {
-        self.dequeArray = [@[] mutableCopy];
+        _dequeArray = [@[] mutableCopy];
     }
     return self;
 }
@@ -55,6 +56,7 @@
     if ([self.dequeArray count] > 0) {
         id object = [self peekFirstObject];
         [self.dequeArray removeObjectAtIndex:0];
+        
         return object;
     }
     
@@ -72,7 +74,7 @@
 - (id)peekFirstObject
 {
     if ([self.dequeArray count] > 0) {
-        return [self.dequeArray objectAtIndex:0];
+        return (self.dequeArray)[0];
     }
     
     return nil;

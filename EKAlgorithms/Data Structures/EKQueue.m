@@ -19,11 +19,12 @@
 
 #pragma mark - init
 
-- (id)init
+- (instancetype)init
 {
     self = [super init];
+    
     if (self) {
-        self.queueArray = [@[] mutableCopy];
+        _queueArray = [@[] mutableCopy];
     }
     return self;
 }
@@ -54,7 +55,7 @@
 - (id)peek
 {
     if ([self.queueArray count] > 0) {
-        return [self.queueArray objectAtIndex:0];
+        return (self.queueArray)[0];
     }
     
     return nil;

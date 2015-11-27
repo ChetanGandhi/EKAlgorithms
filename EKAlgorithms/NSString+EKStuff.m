@@ -9,7 +9,8 @@
 #import "NSString+EKStuff.h"
 #import <objc/runtime.h>
 
-@implementation NSString (EKStuff)
+
+@implementation NSString (EKStuff);
 
 #pragma mark - Is string palindrome
 
@@ -17,7 +18,7 @@
 {
     BOOL result = NO;
     NSString *nonWhitespacedBufferString = [[self stringByReplacingOccurrencesOfString:@" " withString:@""] lowercaseString];
-    NSString *reverseString = [self reversedString];
+    NSString *reverseString              = [self reversedString];
     
     result = [reverseString isEqualToString:nonWhitespacedBufferString] ? YES : NO;
     
@@ -30,8 +31,8 @@
 {
     NSMutableString *result = [[NSMutableString alloc] init];
     
-    for (NSInteger i = [self length] - 1; i >= 0; i--) {
-        [result appendString:[NSString stringWithFormat:@"%C", [self characterAtIndex:i]]];
+    for (NSInteger i = (NSInteger)[self length] - 1; i >= 0; i--) {
+        [result appendString:[NSString stringWithFormat:@"%C", [self characterAtIndex: (NSUInteger)i]]];
     }
     
     return [result copy];
@@ -41,8 +42,8 @@
 
 - (NSUInteger)numberOfWordsInString
 {
-    const char *str = [self UTF8String];
-    BOOL state = NO;
+    const char *str        = [self UTF8String];
+    BOOL state             = NO;
     NSUInteger wordCounter = 0;
     
     while (*str) {
@@ -65,7 +66,7 @@
 + (void)swapValuesOfPointer:(char *)xPointer toPointer:(char *)yPointer
 {
     char temp;
-    temp = *xPointer;
+    temp      = *xPointer;
     *xPointer = *yPointer;
     *yPointer = temp;
 }
@@ -199,7 +200,7 @@
 
 - (NSInteger)indexOfLastOccurrenceOfNeedle:(NSString *)needle
 {
-    NSString *reversedNeedle = [needle reversedString];
+    NSString *reversedNeedle   = [needle reversedString];
     NSString *reversedHaystack = [self reversedString];
     
     NSInteger firstOccurrenceInReversedString = [reversedHaystack indexOfFirstOccurrenceOfNeedle:reversedNeedle];
@@ -336,6 +337,7 @@ enum decreaseDir {kInit = 0, kLeftUp, kUp, kLeft};
     }
     
     NSMutableArray *d = [NSMutableArray arrayWithCapacity:m + 1];
+    
     for (int i = 0; i <= m; i++) {
         d[i] = [NSMutableArray arrayWithCapacity:n + 1];
         d[i][0] = @(i);
@@ -358,6 +360,77 @@ enum decreaseDir {kInit = 0, kLeftUp, kUp, kLeft};
     }
     
     return [d[m][n] integerValue];
+}
+
+#pragma mark - KMP (Knuth-Morris-Prat)
+
+- (NSInteger)KMPindexOfSubstringWithPattern:(NSString *)pattern
+{
+    NSParameterAssert(pattern != nil);
+    
+    NSUInteger selfLenght    = [self length];
+    NSUInteger patternLenght = [pattern length];
+    
+    NSInteger *prefix = [self computePrefixFunctionForPattern:pattern];
+    NSParameterAssert(prefix != NULL);
+    
+    const char *utf8Self        = [self UTF8String];
+    size_t self_C_string_lenght = strlen(utf8Self) + 1;
+    
+    char haystack_C_array[self_C_string_lenght];
+    memcpy(haystack_C_array, utf8Self, self_C_string_lenght);
+    
+    const char *utf8Pattern        = [pattern UTF8String];
+    size_t pattern_C_string_lenght = strlen(utf8Pattern) + 1;
+    
+    char needle_C_array[pattern_C_string_lenght];
+    memcpy(needle_C_array, utf8Pattern, pattern_C_string_lenght);
+    
+    NSInteger k = -1;
+    
+    for (NSUInteger i = 0; i < selfLenght; i++) {
+        while (k > -1 && needle_C_array[k + 1] != haystack_C_array[i]) {
+            k = prefix[k];
+        }
+        if (haystack_C_array[i] == needle_C_array[k + 1]) {
+            k++;
+        }
+        if (k == patternLenght - 1) {
+            free(prefix);
+            return i - k;
+        }
+    }
+    free(prefix);
+    
+    return -1;
+}
+
+- (NSInteger *)computePrefixFunctionForPattern:(NSString *)pattern
+{
+    NSUInteger pattern_ObjC_string_lenght = [pattern length];
+    
+    const char *utf8Pattern        = [pattern UTF8String];
+    size_t pattern_C_string_lenght = strlen(utf8Pattern) + 1;
+    
+    char pattern_C_Array[pattern_C_string_lenght];
+    memcpy(pattern_C_Array, utf8Pattern, pattern_C_string_lenght);
+    
+    NSInteger *prefix = malloc(sizeof(NSInteger) * pattern_ObjC_string_lenght);
+    NSParameterAssert(prefix != NULL);
+    
+    NSInteger k = -1;
+    prefix[0] = k;
+    
+    for (NSUInteger i = 1; i < pattern_ObjC_string_lenght; i++) {
+        while (k > -1 && pattern_C_Array[k + 1] != pattern_C_Array[i]) {
+            k = prefix[k];
+        }
+        if (pattern_C_Array[i] == pattern_C_Array[k + 1]) {
+            k++;
+        }
+        prefix[i] = k;
+    }
+    return prefix;
 }
 
 @end

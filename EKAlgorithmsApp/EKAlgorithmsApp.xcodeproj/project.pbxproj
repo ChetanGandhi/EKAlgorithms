@@ -6,9 +6,23 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		DE35FFAB1AC610D100054E83 /* OCLintStaticAnalysis */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = DE35FFAE1AC610D100054E83 /* Build configuration list for PBXAggregateTarget "OCLintStaticAnalysis" */;
+			buildPhases = (
+				DE35FFAF1AC610D900054E83 /* OCLint script */,
+			);
+			dependencies = (
+			);
+			name = OCLintStaticAnalysis;
+			productName = OCLintStaticAnalysis;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		86C5147B18F80E5A00B5E9AE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86C5147A18F80E5A00B5E9AE /* Foundation.framework */; };
-		86C5147E18F80E5A00B5E9AE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C5147D18F80E5A00B5E9AE /* main.m */; };
+		86C5147E18F80E5A00B5E9AE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C5147D18F80E5A00B5E9AE /* main.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		86C5148218F80E5A00B5E9AE /* EKAlgorithmsApp.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 86C5148118F80E5A00B5E9AE /* EKAlgorithmsApp.1 */; };
 		86C5148E18F80E8000B5E9AE /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86C5148D18F80E8000B5E9AE /* XCTest.framework */; };
 		86C5149418F80E8000B5E9AE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 86C5149218F80E8000B5E9AE /* InfoPlist.strings */; };
@@ -70,8 +84,8 @@
 		86EBBC1018F82B3A00F888C3 /* NSNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 86EBBC0518F82B2F00F888C3 /* NSNumber.m */; };
 		86EBBC1118F82B3A00F888C3 /* ProblemsSpecs.m in Sources */ = {isa = PBXBuildFile; fileRef = 86EBBC0618F82B2F00F888C3 /* ProblemsSpecs.m */; };
 		86EBBC1218F82B3A00F888C3 /* SortingSpecs.m in Sources */ = {isa = PBXBuildFile; fileRef = 86EBBC0718F82B2F00F888C3 /* SortingSpecs.m */; };
-		8F0E298619015E3A00CC3934 /* RadixNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0E298519015E3A00CC3934 /* RadixNode.m */; };
-		8F0E298719015E3A00CC3934 /* RadixNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0E298519015E3A00CC3934 /* RadixNode.m */; };
+		8F0E298619015E3A00CC3934 /* SSRadixNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0E298519015E3A00CC3934 /* SSRadixNode.m */; };
+		8F0E298719015E3A00CC3934 /* SSRadixNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0E298519015E3A00CC3934 /* SSRadixNode.m */; };
 		C22C87D3FD1E427AA38427B2 /* libPods-EKAlgorithmsSpecs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 666CA5D0F3A84DDFB57C1434 /* libPods-EKAlgorithmsSpecs.a */; };
 /* End PBXBuildFile section */
 
@@ -162,9 +176,15 @@
 		86EBBC0618F82B2F00F888C3 /* ProblemsSpecs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProblemsSpecs.m; sourceTree = "<group>"; };
 		86EBBC0718F82B2F00F888C3 /* SortingSpecs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SortingSpecs.m; sourceTree = "<group>"; };
 		86EBBC0818F82B2F00F888C3 /* SpecHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecHelpers.h; sourceTree = "<group>"; };
-		8F0E298419015E3A00CC3934 /* RadixNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadixNode.h; sourceTree = "<group>"; };
-		8F0E298519015E3A00CC3934 /* RadixNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadixNode.m; sourceTree = "<group>"; };
+		8F0E298419015E3A00CC3934 /* SSRadixNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSRadixNode.h; sourceTree = "<group>"; };
+		8F0E298519015E3A00CC3934 /* SSRadixNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSRadixNode.m; sourceTree = "<group>"; };
+		BE2136521249107F069344C7 /* NSNumber+EKComparisonForIOS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+EKComparisonForIOS.m"; sourceTree = "<group>"; };
+		BE213B2FD66EC9DAD9868924 /* NSNumber+EKComparisonForIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+EKComparisonForIOS.h"; sourceTree = "<group>"; };
+		BE213D0FE76038744D6D6602 /* NSObject+EKComparisonForIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+EKComparisonForIOS.h"; sourceTree = "<group>"; };
+		BE213EAE66F455F35DC5C744 /* NSObject+EKComparisonForIOS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+EKComparisonForIOS.m"; sourceTree = "<group>"; };
 		CF81BD80824A41FB97720C8E /* Pods-EKAlgorithmsSpecs.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EKAlgorithmsSpecs.xcconfig"; path = "Pods/Pods-EKAlgorithmsSpecs.xcconfig"; sourceTree = "<group>"; };
+		DE479F911A053CED00A441A0 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		DE479F921A053D5000A441A0 /* Base.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Base.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,6 +254,8 @@
 		86C5147F18F80E5A00B5E9AE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DE479F921A053D5000A441A0 /* Base.xcconfig */,
+				DE479F911A053CED00A441A0 /* Debug.xcconfig */,
 				86C5148018F80E5A00B5E9AE /* EKAlgorithmsApp-Prefix.pch */,
 			);
 			name = "Supporting Files";
@@ -275,6 +297,7 @@
 				86C515C018F8162F00B5E9AE /* Problems */,
 				86C515C318F8162F00B5E9AE /* Selection */,
 				86C515C618F8162F00B5E9AE /* Sorting */,
+				BE2135C7675C9E828AB04827 /* iOS */,
 			);
 			name = EKAlgorithms;
 			path = ../EKAlgorithms;
@@ -405,8 +428,8 @@
 			children = (
 				86C515C718F8162F00B5E9AE /* NSArray+EKSorting.h */,
 				86C515C818F8162F00B5E9AE /* NSArray+EKSorting.m */,
-				8F0E298419015E3A00CC3934 /* RadixNode.h */,
-				8F0E298519015E3A00CC3934 /* RadixNode.m */,
+				8F0E298419015E3A00CC3934 /* SSRadixNode.h */,
+				8F0E298519015E3A00CC3934 /* SSRadixNode.m */,
 			);
 			path = Sorting;
 			sourceTree = "<group>";
@@ -423,6 +446,17 @@
 			);
 			name = Specs;
 			path = ../Specs;
+			sourceTree = "<group>";
+		};
+		BE2135C7675C9E828AB04827 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				BE213EAE66F455F35DC5C744 /* NSObject+EKComparisonForIOS.m */,
+				BE213B2FD66EC9DAD9868924 /* NSNumber+EKComparisonForIOS.h */,
+				BE213D0FE76038744D6D6602 /* NSObject+EKComparisonForIOS.h */,
+				BE2136521249107F069344C7 /* NSNumber+EKComparisonForIOS.m */,
+			);
+			path = iOS;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -470,8 +504,14 @@
 		86C5146F18F80E5A00B5E9AE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				CLASSPREFIX = EK;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Evgeny Karkan";
+				TargetAttributes = {
+					DE35FFAB1AC610D100054E83 = {
+						CreatedOnToolsVersion = 6.2;
+					};
+				};
 			};
 			buildConfigurationList = 86C5147218F80E5A00B5E9AE /* Build configuration list for PBXProject "EKAlgorithmsApp" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -487,6 +527,7 @@
 			targets = (
 				86C5147618F80E5A00B5E9AE /* EKAlgorithmsExamples */,
 				86C5148B18F80E8000B5E9AE /* EKAlgorithmsSpecs */,
+				DE35FFAB1AC610D100054E83 /* OCLintStaticAnalysis */,
 			);
 		};
 /* End PBXProject section */
@@ -536,6 +577,20 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		DE35FFAF1AC610D900054E83 /* OCLint script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "OCLint script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "source ~/.bash_profile\n\nhash oclint &> /dev/null\nif [ $? -eq 1 ]; then\necho >&2 \"oclint not found, analyzing stopped\"\nexit 1\nfi\n\ncd ${TARGET_TEMP_DIR}\n\nif [ ! -f compile_commands.json ]; then\necho \"[*] compile_commands.json not found, possibly clean was performed\"\necho \"[*] starting xcodebuild to rebuild the project..\"\n# clean previous output\nif [ -f xcodebuild.log ]; then\nrm xcodebuild.log\nfi\n\ncd ${SRCROOT}\n\nxcodebuild clean\n\n#build xcodebuild.log\nxcodebuild | tee ${TARGET_TEMP_DIR}/xcodebuild.log\n#xcodebuild <options>| tee ${TARGET_TEMP_DIR}/xcodebuild.log\n\necho \"[*] transforming xcodebuild.log into compile_commands.json...\"\ncd ${TARGET_TEMP_DIR}\n#transform it into compile_commands.json\noclint-xcodebuild\n\necho \"[*] copy compile_commands.json to the project root...\"\ncp ${TARGET_TEMP_DIR}/compile_commands.json ${SRCROOT}/compile_commands.json\n\nfi\n\necho \"[*] starting analyzing\"\ncd ${TARGET_TEMP_DIR}\noclint-json-compilation-database | sed 's/\\(.*\\.\\m\\{1,2\\}:[0-9]*:[0-9]*:\\)/\\1 warning:/'";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -545,7 +600,7 @@
 			files = (
 				86C515D618F8162F00B5E9AE /* EKDeque.m in Sources */,
 				86C515D818F8162F00B5E9AE /* EKQueue.m in Sources */,
-				8F0E298619015E3A00CC3934 /* RadixNode.m in Sources */,
+				8F0E298619015E3A00CC3934 /* SSRadixNode.m in Sources */,
 				86C515F018F8162F00B5E9AE /* NSArray+EKGeometry.m in Sources */,
 				86C515D418F8162F00B5E9AE /* EKBHeap.m in Sources */,
 				86C515E818F8162F00B5E9AE /* EKTree.m in Sources */,
@@ -578,7 +633,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				86C515D118F8162F00B5E9AE /* EKBTreeNode.m in Sources */,
-				8F0E298719015E3A00CC3934 /* RadixNode.m in Sources */,
+				8F0E298719015E3A00CC3934 /* SSRadixNode.m in Sources */,
 				86C515CE18F8162F00B5E9AE /* EKBSTree.m in Sources */,
 				86EBBC0E18F82B3A00F888C3 /* GeometrySpecs.m in Sources */,
 				86C515D718F8162F00B5E9AE /* EKDeque.m in Sources */,
@@ -640,8 +695,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -678,12 +736,15 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = NDEBUG;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -717,6 +778,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CF81BD80824A41FB97720C8E /* Pods-EKAlgorithmsSpecs.xcconfig */;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
@@ -728,6 +790,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "EKAlgorithmsSpecs/EKAlgorithmsSpecs-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -737,6 +800,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CF81BD80824A41FB97720C8E /* Pods-EKAlgorithmsSpecs.xcconfig */;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
@@ -744,8 +808,23 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EKAlgorithmsSpecs/EKAlgorithmsSpecs-Prefix.pch";
 				INFOPLIST_FILE = "EKAlgorithmsSpecs/EKAlgorithmsSpecs-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+		DE35FFAC1AC610D100054E83 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		DE35FFAD1AC610D100054E83 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -775,6 +854,15 @@
 			buildConfigurations = (
 				86C5149918F80E8000B5E9AE /* Debug */,
 				86C5149A18F80E8000B5E9AE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DE35FFAE1AC610D100054E83 /* Build configuration list for PBXAggregateTarget "OCLintStaticAnalysis" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DE35FFAC1AC610D100054E83 /* Debug */,
+				DE35FFAD1AC610D100054E83 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

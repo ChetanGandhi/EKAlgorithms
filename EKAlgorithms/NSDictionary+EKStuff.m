@@ -9,6 +9,7 @@
 #import "NSDictionary+EKStuff.h"
 #import "NSNumber+EKStuff.h"
 
+
 @implementation NSDictionary (EKStuff)
 
 @end
@@ -19,20 +20,23 @@
 - (void)increaseValueForKey:(NSString *)key By:(NSNumber *)num
 {
     id object = [self valueForKey:key];
+    
     if ([object isKindOfClass:[NSNumber class]]) {
-        NSNumber *value = object;
-        NSNumber *result;
+        NSNumber *value  = object;
+        NSNumber *result = nil;
+        
         switch ([value numberType]) {
             case kCFNumberSInt32Type:
-                result = [NSNumber numberWithInt:([num intValue] + [value intValue])];
+                result = @([num intValue] + [value intValue]);
                 break;
+                
             case kCFNumberSInt64Type:
-                result = [NSNumber numberWithInteger:([num integerValue] + [value integerValue])];
+                result = @([num integerValue] + [value integerValue]);
                 break;
                 
             case kCFNumberFloat32Type:
             case kCFNumberFloat64Type:
-                result = [NSNumber numberWithFloat:([num floatValue] + [value floatValue])];
+                result = @([num floatValue] + [value floatValue]);
                 break;
                 
             default:
@@ -41,28 +45,32 @@
                 break;
         }
         [self setValue:result forKey:key];
-    } else {
+    }
+    else {
         NSAssert(0, @"Object is not a instance of NSNumber!");
     }
 }
 
 - (void)increaseObjectForKey:(id)aKey By:(NSNumber *)num
 {
-    id object = [self objectForKey:aKey];
+    id object = self[aKey];
+    
     if ([object isMemberOfClass:[NSNumber class]]) {
-        NSNumber *value = object;
-        NSNumber *result;
+        NSNumber *value  = object;
+        NSNumber *result = nil;
+        
         switch ([value numberType]) {
             case kCFNumberSInt32Type:
-                result = [NSNumber numberWithInt:([num intValue] + [value intValue])];
+                result = @([num intValue] + [value intValue]);
                 break;
+                
             case kCFNumberSInt64Type:
-                result = [NSNumber numberWithInteger:([num integerValue] + [value integerValue])];
+                result = @([num integerValue] + [value integerValue]);
                 break;
                 
             case kCFNumberFloat32Type:
             case kCFNumberFloat64Type:
-                result = [NSNumber numberWithFloat:([num floatValue] + [value floatValue])];
+                result = @([num floatValue] + [value floatValue]);
                 break;
                 
             default:
@@ -70,8 +78,9 @@
                 result = value;
                 break;
         }
-        [self setObject:result forKey:aKey];
-    } else {
+        self[aKey] = result;
+    }
+    else {
         NSAssert(0, @"Object is not a instance of NSNumber!");
     }
 }

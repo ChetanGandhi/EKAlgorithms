@@ -9,12 +9,17 @@
 #import "EKBTree.h"
 #import "EKQueue.h"
 
-@implementation EKBTree
+#if TARGET_OS_IPHONE
+#import "NSObject+EKComparisonForIOS.h"
+#endif
+
+
+@implementation EKBTree;
 
 - (instancetype)initWithObject:(NSObject *)object
 {
     if (self = [super init]) {
-        self.root = [[EKBTreeNode alloc] init];
+        _root            = [[EKBTreeNode alloc] init];
         self.root.object = object;
     }
     

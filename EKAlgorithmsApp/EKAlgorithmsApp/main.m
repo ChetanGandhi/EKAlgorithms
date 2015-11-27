@@ -28,20 +28,22 @@
 int main(int argc, const char *argv[])
 {
 	@autoreleasepool {
+#pragma mark - Array
+        
         //Init array with 5 random elements
         NSMutableArray *array = [NSMutableArray array];
         for (int i = 0; i < 5; i++) {
-            [array addObject:[NSNumber numberWithInt:arc4random() % 20]];
+            [array addObject:@(arc4random() % 20)];
         }
 
         //Max element of array
         NSLog(@"Max element of created array %@ equals to %@ and stored at index %li", [array debugDescription],
-              [array objectAtIndex:(long)[array indexOfMaximumElement]],
+              array[(long)[array indexOfMaximumElement]],
               (long)[array indexOfMaximumElement]);
 
         //Get the Max and Min Simultaneously.
         NSArray *indexes = [array indexesOfMinimumAndMaximumElements];
-        NSLog(@"Min and max elements of created array %@ equal to %@ and %@ and stored at indexes: %@ %@", [array debugDescription], [array objectAtIndex:[[indexes firstObject] unsignedIntegerValue]], [array objectAtIndex:[[indexes lastObject] unsignedIntegerValue]],
+        NSLog(@"Min and max elements of created array %@ equal to %@ and %@ and stored at indexes: %@ %@", [array debugDescription], array[[[indexes firstObject] unsignedIntegerValue]], array[[[indexes lastObject] unsignedIntegerValue]],
               [indexes firstObject], [indexes lastObject]);
 
         //Longest string from array
@@ -69,7 +71,7 @@ int main(int argc, const char *argv[])
             [oneArray addObject:currentDic];
             [twoArray addObject:currentDic];
         }
-        [oneArray addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"EKAlgorithms100", someKey, nil]];
+        [oneArray addObject:@{someKey: @"EKAlgorithms100"}];
         NSLog(@"Union some key is %@", [oneArray unionWithoutDuplicatesWithArray:twoArray forKey:someKey]);
         
         //Find duplicates
@@ -94,6 +96,7 @@ int main(int argc, const char *argv[])
         //NSLog(@"Occurences by using dictionary is --> %@", [@[@[], @{}, @"four", @"five", @"four", @"one", @"three", @"eight", @"one", @"four"] occurencesOfEachElementInArrayByUsingDictionary]);
         NSLog(@"Occurences via Cocoa APIs is --> %@", [@[@3, @3, @4, @5, @4, @1, @3, @8, @1] CocoaImplementationOfOccurencesOfEachElementInArray]);
 
+#pragma mark - Search
         //SEARCH------------------------------------------------------------------------------------
 
         //Linear search
@@ -102,6 +105,7 @@ int main(int argc, const char *argv[])
         //Binary search
         NSLog(@"Binary search result: %li", (long)[@[@6, @9, @12, @13, @14, @29, @42] indexOfObjectViaBinarySearch: @42]);
 
+#pragma mark - Search
         //SORTING-----------------------------------------------------------------------------------
 
         //Bubble sort
@@ -128,6 +132,7 @@ int main(int argc, const char *argv[])
         //Heap sort
         NSLog(@"Heap sorted array --> %@", [[@[@9871523, @0.0987516, @NO, @89, @ - 61.001256, @712.5, @YES, @384756] mutableCopy] heapSort]);
 
+#pragma mark - Strings
         //STRINGS-----------------------------------------------------------------------------------
 
         //Palindrome string
@@ -168,7 +173,11 @@ int main(int argc, const char *argv[])
 
         //Levenshtein Distance
         NSLog(@"Levenshtein Distance of levenshtein and meilenstein is --> %ld", (long)[@"levenshtein" LD_WithString: @"meilenstein"]);
-
+        
+        // KMP
+        NSLog(@"Index of KMP string match is --> %ld", [@"bacbababaabcbab" KMPindexOfSubstringWithPattern:@"bab"]);
+        
+#pragma mark - Numeric problems
         //NUMERIC PROBLEMS--------------------------------------------------------------------------
 
         //Sieve of Eratosf
@@ -237,6 +246,7 @@ int main(int argc, const char *argv[])
         //Fast inverse square root
         NSLog(@"FISR is --> %@", @([@5 fastInverseSquareRoot]));
 
+#pragma mark - Data structures
         //DATA STRUCTURES---------------------------------------------------------------------------
 
         //Stack
@@ -504,6 +514,7 @@ int main(int argc, const char *argv[])
         
         [[EKTree forestToBinaryTree:@[forest1, forest2]] levelOrderTraversal];
         
+#pragma mark - Recursion
         //RECURSION---------------------------------------------------------------------------------
         
         //Tower of Hanoi

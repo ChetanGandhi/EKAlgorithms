@@ -35,4 +35,6 @@
  */
 - (NSInteger)LD_WithString:(NSString*)other;
 
+- (NSInteger)KMPindexOfSubstringWithPattern:(NSString *)pattern;
+
 @end

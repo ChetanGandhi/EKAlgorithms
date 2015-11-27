@@ -14,8 +14,8 @@
 - (instancetype)initWithObject:(NSObject *)obj compareSelector:(SEL)selector
 {
     if (self = [super init]) {
-        self.root = [[EKBTreeNode alloc] init];
-        self.root.object = obj;
+        _root                     = [[EKBTreeNode alloc] init];
+        self.root.object          = obj;
         self.root.compareSelector = selector;
     }
     
@@ -24,12 +24,12 @@
 
 - (void)insertObject:(NSObject *)newObj
 {
-    EKBTreeNode *treeNode = [[EKBTreeNode alloc] init];
-    treeNode.object = newObj;
+    EKBTreeNode *treeNode    = [[EKBTreeNode alloc] init];
+    treeNode.object          = newObj;
     treeNode.compareSelector = self.root.compareSelector;
     
     EKBTreeNode *currentNode = self.root;
-    EKBTreeNode *parentNode = self.root;
+    EKBTreeNode *parentNode  = self.root;
     
     while (YES) {
 #pragma clang diagnostic push
@@ -39,7 +39,7 @@
         if (result >= 0) {
             if (!currentNode.rightChild) {
                 currentNode.rightChild = treeNode;
-                treeNode.parent = parentNode;
+                treeNode.parent        = parentNode;
                 break;
             }
             else {
@@ -50,12 +50,12 @@
         else {
             if (!currentNode.leftChild) {
                 currentNode.leftChild = treeNode;
-                treeNode.parent = parentNode;
+                treeNode.parent       = parentNode;
                 break;
             }
             else {
                 currentNode = currentNode.leftChild;
-                parentNode = currentNode;
+                parentNode  = currentNode;
             }
         }
     }
@@ -69,9 +69,10 @@
 - (EKBTreeNode *)deleteObject:(NSObject *)obj
 {
     EKBTreeNode *node = [self find:obj];
+    
     if (node) {
         if (node.leftChild && node.rightChild) {
-            // Use in-order successor node
+                // Use in-order successor node
             EKBTreeNode *tmpCell = node.rightChild;
             while (tmpCell.leftChild) {
                 tmpCell = tmpCell.leftChild;
@@ -84,29 +85,34 @@
              }
              */
             NSObject *temp;
-            temp = [node.object copy];
-            node.object = [tmpCell.object copy];
-            tmpCell.object = temp;
+            temp            = [node.object copy];
+            node.object     = [tmpCell.object copy];
+            tmpCell.object  = temp;
             node.rightChild = [self deleteObject:temp];
-        } else {
+        }
+        else {
             if (node.leftChild != nil) {
                 node = node.leftChild;
-            } else if (node.rightChild != nil) {
+            }
+            else if (node.rightChild != nil) {
                 node = node.rightChild;
             }
             if ([node isLeftChildOfParent]) {
                 node.parent.leftChild = nil;
-            } else {
+            }
+            else {
                 node.parent.rightChild = nil;
             }
         }
     }
+    
     return node;
 }
 
 - (EKBTreeNode *)find:(NSObject *)obj
 {
     EKBTreeNode *currentNode = self.root;
+    
     while (YES) {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
@@ -115,17 +121,22 @@
         if (result > 0) {
             if (currentNode.rightChild) {
                 currentNode = currentNode.rightChild;
-            } else
+            }
+            else
                 return nil;
-        } else if (result < 0) {
+        }
+        else if (result < 0) {
             if (currentNode.leftChild) {
                 currentNode = currentNode.leftChild;
-            } else
+            }
+            else
                 return nil;
-        } else {
+        }
+        else {
             break;
         }
     }
+    
     return currentNode;
 }
 
